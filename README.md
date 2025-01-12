@@ -2,75 +2,179 @@
 
 ## Overview
 
-The **Skills Radar Plot Generator** is a Python program designed to create visually appealing radar plots for skills assessment. It is ideal for individuals and teams to analyze strengths and areas for improvement in a structured manner.
+The **Skills Radar Plot Generator** is a Python application that creates visually appealing radar plots for skills assessment. It's ideal for professionals and teams to analyze strengths and improvement areas in a structured and insightful way.
 
 ## Features
-- Customizable inputs for skill categories and corresponding scores.
-- Enhanced visuals with configurable colors, gridlines, and labels.
-- Radar-style plotting for clear data representation.
-- Display of skill scores directly on the plot for better readability.
 
-## Installation
+- **Customizable**: Easily adapt categories and scores to suit your needs.
+- **Stylized Visuals**: Enhanced with colors, gridlines, and labels for readability.
+- **Developer-Friendly**: Modular structure, making it easy to contribute or extend functionality.
+- **Unit Tests**: Comprehensive test coverage to ensure reliability.
 
-1. **Clone the repository**:
+## Getting Started
+
+### Prerequisites
+
+- **Python 3.8+**
+- **pip** (Python package manager)
+- **Docker** (optional, for containerized development)
+
+### Setting Up a Virtual Environment (Recommended)
+
+1. **Create and activate a virtual environment**:
 
 ```bash
-git clone <repo_url>
-cd skills-radar-plot-generator
+pip install virtualenv
 ```
 
-2. Install required dependencies:
+Navigate to your project directory and run the following command to create a virtual environment:
 
-Ensure Python is installed on your system, then install the necessary libraries:
-
-```
-pip install matplotlib numpy
-```
-
-
-## Usage
-
-1. Run the program:
-
-```
-python skills_radar_plot.py
+```bash
+virtualenv venv
+source venv/bin/activate
 ```
 
-2. Customize your skills and scores:
+2. Install the required dependencies:
 
-Open the skills_radar_plot.py script and modify the categories and scores lists to fit your needs.
-
-3. Output:
-
-The program will display a radar plot highlighting skills with their respective scores.
-
-Example Input
-
-```
-categories = [
-    "Problem-Solving", "Coding", "System Design", 
-    "Version Control", "DevOps", "Testing"
-]
-scores = [5, 4, 3, 4, 2, 3]
+```bash
+pip install -r requirements.txt
 ```
 
-Example Output
+3.	Deactivate the environment when done:
 
-The radar plot will visually display the input categories and scores, with distinct colors and labels for easy analysis.
+```bash
+deactivate
+```
 
-## Debugging
+### Using Docker for Development (Optional)
 
-1.	Input Validation:
-    •	Ensure the categories and scores lists have the same length.
-	•	Ensure all scores are numeric values.
-2.	Common Issues:
-	•	IndexError: Caused by mismatched lengths of categories and scores.
-	•	ModuleNotFoundError: Ensure all dependencies are installed.
-3.	Enhancements:
-	•	Add CLI support for dynamic input.
-	•	Save the radar plot as an image file.
-	•	Add unit tests for individual functions.
+1.	Build the Docker image:
+
+```bash
+docker build -t skills-radar-plot .
+```
+
+2.	Run the Docker container:
+
+```bash
+docker run --rm -v "$(pwd)/outputs:/app/outputs" skills-radar-plot
+```
+
+After the container completes its execution, the image will be available in the outputs/ directory on your host machine.
+
+
+3.	(Optional) Using Docker Compose:
+Start the service using docker-compose:
+
+```bash
+docker-compose up
+```
+
+
+## Run the Application
+
+To generate and display the radar plot, use:
+
+•	With virtual environment:
+
+```bash
+python main.py
+```
+
+•	With Docker:
+
+```
+docker run --rm -it skills-radar-plot
+```
+
+
+
+## Customize Inputs
+
+To use your own data, modify the categories and scores variables in main.py:
+
+```python
+categories = ["Problem-Solving", "Coding", "DevOps"]
+scores = [5, 4, 3]
+```
+
+## Examples
+
+### Example Input
+
+You can also find examples in the examples/ directory. Here’s an example:
+
+```python
+from skills_radar_plot.plot import create_skills_radar_plot
+import matplotlib.pyplot as plt
+
+categories = ["Problem-Solving", "Coding", "DevOps"]
+scores = [5, 4, 3]
+
+fig, ax = create_skills_radar_plot(categories, scores)
+plt.show()
+```
+
+Run the example from the root dir:
+
+```bash
+python -m examples.example_input
+```
+
+## Running Tests
+
+The project includes unit tests to ensure functionality and reliability.
+
+### Run All Tests
+
+To run all tests, use:
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+### Example Test Output
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+## Contributing
+
+We welcome contributions!
+
+## Project Structure
+
+```
+skills-radar-plot-generator/
+├── LICENSE
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── main.py
+├── skills_radar_plot/
+│   ├── __init__.py
+│   ├── plot.py
+│   └── utils/
+│       ├── __init__.py
+│       ├── grid.py
+│       └── axes.py
+├── examples/
+│   ├── example_input.py
+├── outputs/               # Directory for generated images
+│   └── (e.g., radar_plot_20250112_150000.png)
+└── tests/
+    ├── __init__.py
+    ├── test_plot.py
+    ├── test_utils.py
+```
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Feedback
+
+We value your feedback! If you encounter any issues or have feature requests, please open an issue.
