@@ -64,10 +64,30 @@ After the container completes its execution, the image will be available in the 
 
 
 3.	(Optional) Using Docker Compose:
-Start the service using docker-compose:
+
+
+**Build the Services:**
 
 ```bash
-docker-compose up
+docker-compose build
+```
+
+**Run the Application:**
+
+```bash
+docker-compose up app
+```
+
+**Run Tests:**
+
+```bash
+docker-compose up tests
+```
+
+**Cleanup:**
+
+```bash
+docker-compose up down
 ```
 
 
